@@ -24,5 +24,4 @@ This are some useful libraries (not all of them are present in this project).
 - Redux & Sagas if you prefer centralized data stores.
 
 ## Try it
-
-After running `yarn start`, you can run `yarn build` to build the project and `yarn serve` to fire up a server, default port is `4000`. You can also use `npm` if that's your package manager of choice.
+In the `front` directory, after running `yarn start`, you can run `yarn build` to build the project and `yarn serve` to fire up a server, default port is `4000`. You can also use `npm` if that's your package manager of choice.
