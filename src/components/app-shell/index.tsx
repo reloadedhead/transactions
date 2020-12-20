@@ -6,11 +6,6 @@ import Header from './header';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
-    root: {
-      [theme.breakpoints.up('sm')]: {
-        display: 'flex',
-      },
-    },
     toolbar: theme.mixins.toolbar,
     sidebarLayout: {
       flexGrow: 1,
@@ -25,7 +20,6 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     content: {
       flexGrow: 1,
-      padding: theme.spacing(3),
     },
   })
 );
@@ -34,7 +28,7 @@ const AppShell = () => {
   const classes = useStyles();
 
   return (
-    <div className={classes.root}>
+    <div>
       <CssBaseline />
       <Header />
       <main className={classes.content}>

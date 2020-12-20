@@ -25,7 +25,7 @@ const Header = () => {
   const classes = useStyles();
   return (
     <div className={classes.root}>
-      <AppBar>
+      <AppBar elevation={0}>
         <Toolbar>
           <Typography variant="h6" className={classes.title}>
             In & Out
