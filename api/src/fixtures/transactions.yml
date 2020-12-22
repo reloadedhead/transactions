@@ -1,0 +1,9 @@
+entity: Transaction
+items:
+  Transaction{1..100}:
+    id: '{{random.number}}'
+    amount: '{{finance.amount}}'
+    description: '{{random.words}}'
+    type: 'expense'
+    password: '{{random.alphaNumeric}}'
+    user: '@user*'

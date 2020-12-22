@@ -1,0 +1,8 @@
+entity: User
+items:
+  user{1..10}:
+    id: '{{random.number}}'
+    firstName: '{{name.firstName}}'
+    lastName: '{{name.lastName}}'
+    email: '{{internet.email}}'
+    password: '{{internet.password}}'
