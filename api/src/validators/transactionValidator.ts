@@ -1,6 +1,6 @@
 import { IsDefined, IsNumber } from "class-validator";
 
-export default class TransactionValidator {
+export class TransactionValidator {
   @IsDefined()
   @IsNumber()
   amount: number;
@@ -10,4 +10,13 @@ export default class TransactionValidator {
 
   @IsDefined()
   type: string;
+}
+
+export class UpdateTransactionValidator {
+  @IsDefined()
+  @IsNumber()
+  amount: number;
+
+  @IsDefined()
+  description: string;
 }
