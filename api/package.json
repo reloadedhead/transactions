@@ -27,8 +27,7 @@
     "typeorm": "^0.2.29"
   },
   "scripts": {
-    "start": "cross-env TOKEN_EXPIRES_IN=\"7200\" JWT_SECRET=\"secret\" API_PORT=\"3005\" debug=\"*\" ts-node-dev --respawn --transpileOnly ./src/index.ts",
-    "start:test": "tsc && cross-env NODE_ENV=\"test\" TOKEN_EXPIRES_IN=\"3600\" JWT_SECRET=\"secret\" API_PORT=\"3005\" node ./dist/index.js",
+    "start": "cross-env NODE_ENV=\"development\" ts-node-dev --respawn --transpile-only ./src/index.ts",
     "prod": "tsc && cross-env TOKEN_EXPIRES_IN=\"3600\" JWT_SECRET=\"secret\" API_PORT=\"3005\" node ./dist/index.js",
     "build": "tsc",
     "db:start": "docker-compose up",
