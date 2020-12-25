@@ -1,14 +1,18 @@
 import { Router } from "express";
-import { ParamsDictionary } from "express-serve-static-core";
-import TransactionController from "../controllers/transactionController";
+import TransactionController, { TransactionParams } from "../controllers/transactionController";
 
 const transactionRoutes = Router();
 
-transactionRoutes.get<ParamsDictionary>('/:transactionId([0-9]+)', [], TransactionController.getTransactionById);
+transactionRoutes.get<TransactionParams>('/:transactionId([0-9]+)', [], TransactionController.getTransactionById);
 transactionRoutes.put<TransactionParams>(
   '/:transactionId([0-9]+)',
   [],
   TransactionController.updateTransactionById
+);
+transactionRoutes.delete<TransactionParams>(
+  '/:transactionId([0-9]+)',
+  [],
+  TransactionController.deleteTransactionById
 );
 
 export default transactionRoutes;

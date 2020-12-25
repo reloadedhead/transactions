@@ -54,4 +54,17 @@ export default class TransactionController {
       res.status(500).send(errors);
     }
   };
+
+  static deleteTransactionById = async (
+    req: Request<TransactionParams>,
+    res: Response<string | undefined>
+  ) => {
+    const transactionRepository = getRepository(Transaction, process.env.NODE_ENV);
+    try {
+      transactionRepository.delete(req.params.transactionId);
+      res.status(204).send();
+    } catch (error) {
+      res.status(500).send(error);
+    }
+  };
 }
