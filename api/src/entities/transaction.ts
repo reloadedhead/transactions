@@ -6,7 +6,7 @@ export default class Transaction {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column({ nullable: false })
+  @Column('decimal', { nullable: false, precision: 5, scale: 2 })
   amount: number;
 
   @Column({ nullable: false })
