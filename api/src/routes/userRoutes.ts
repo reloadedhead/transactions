@@ -1,7 +1,7 @@
 import { Router } from 'express';
 import { ValidationError } from 'class-validator';
 import User from '../entities/user';
-import UserController from '../controllers/userController';
+import UserController, { PostTransactionParams } from '../controllers/userController';
 import { ParamsDictionary } from 'express-serve-static-core';
 import Transaction from '../entities/transaction';
 
@@ -15,9 +15,14 @@ userRoutes.post<
 >('/', [], UserController.postUser);
 
 userRoutes.post<
-  ParamsDictionary,
+  PostTransactionParams,
   ValidationError[] | string,
-  Omit<Transaction, 'id' | 'user'>
+  Omit<Transaction, 'id' | 'idUser'>
 >('/:userId([0-9]+)/transaction', UserController.postTransaction);
+
+userRoutes.get<
+  PostTransactionParams,
+  ValidationError[] | string
+>('/:userId([0-9]+)/transaction', UserController.getAllTransactions);
 
 export default userRoutes;

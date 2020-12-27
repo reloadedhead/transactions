@@ -4,29 +4,22 @@ import UserValidator from "../validators/userValidator";
 import { getRepository } from "typeorm";
 import User from "../entities/user";
 import Transaction from "../entities/transaction";
-import TransactionValidator from "../validators/transactionValidator";
+import { TransactionValidator } from "../validators/transactionValidator";
 
-export interface PostUserParams extends ParamsDictionary {
-  firstName: string;
-  lastName: string;
-  email: string;
-  password: string;
+export interface PostUserBody extends User {
   repeatedPassword: string;
 }
 
-interface PostTransactionParams extends ParamsDictionary {
+export interface PostTransactionParams extends ParamsDictionary {
   userId: string;
-  amount: string;
-  description: string
-  type: string;
 }
 
 export default class UserController {
   static postUser = async (
     req: Request<
-      PostUserParams, 
+      ParamsDictionary, 
       string | ValidationError[],
-      Omit<User, 'id' | 'transactions'>
+      Omit<PostUserBody, 'id' | 'transactions'>
     >,
     res: Response<string | ValidationError[]>
   ) => {
@@ -78,11 +71,29 @@ export default class UserController {
     }
 
     const transactionRepository = getRepository(Transaction, process.env.NODE_ENV);
-    (newTransaction as Transaction).user = req.params.userId;
+    (newTransaction as Transaction).idUser = parseInt(req.params.userId);
     try {
       res.status(200).send((await transactionRepository.save(newTransaction)).id.toString())
     } catch (error) {
       res.status(500).send(error)
+    }
+  };
+
+  static getAllTransactions = async (
+    req: Request<
+      PostTransactionParams,
+      ValidationError[] | string
+    >,
+    res: Response<ValidationError[] | string | Transaction[]>
+  ) => {
+    try {
+      const transactionRepository = getRepository(Transaction, process.env.NODE_ENV);
+      const transactions = await transactionRepository.find({ where: { 'idUser': req.params.userId } })
+      res.status(200).json(transactions);
+      return;
+    } catch (error) {
+      res.status(400).send("invalid user");
+      return;
     }
   };
 }

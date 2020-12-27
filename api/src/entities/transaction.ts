@@ -15,6 +15,9 @@ export default class Transaction {
   @Column({ nullable: false })
   type: string;
 
+  @Column({ nullable: false })
+  idUser: number;
+
   @ManyToOne(() => User)
   @JoinColumn({ name: 'idUser', referencedColumnName: 'id' })
   user: User;
