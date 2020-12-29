@@ -1,0 +1,218 @@
+swagger: "2.0"
+info:
+  description: "Swagger for NodeJS-Express Backend Demo"
+  version: "1.0.0-0"
+  title: "Backend Assesment"
+host: "localhost:8080"
+basePath: "/api"
+tags:
+- name: "login"
+  description: "Login to get an access-token."
+- name: "user"
+  description: "Manage Users."
+- name: "transaction"
+  description: "Manage transactions"
+schemes:
+- "https"
+paths:
+  /login:
+    post:
+      tags:
+      - "login"
+      summary: "Log in and retrieve an access token."
+      description: ""
+      consumes:
+      - "application/json"
+      - "application/xml"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters:
+      - in: "query"
+        name: "email"
+        description: "User's email"
+        required: true
+        type: "string"
+      - in: "query"
+        name: "password"
+        type: "string"
+        description: "User's password"
+      responses:
+        "400":
+          description: "Bad request. Invalid email or password"
+        "401":
+          description: "Unauthorized."
+        "200":
+          description: "Logged in. Access-token in response body."
+  /user:
+    post:
+      tags:
+      - "user"
+      summary: "Create user."
+      description: "Creates a new user and saves it in the DB."
+      operationId: "createUser"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Created user object"
+        required: true
+        schema:
+          $ref: "#/definitions/User"
+      responses:
+        default:
+          description: "successful operation"
+        "400":
+          description: "Bad request. Malformed body or incorrect repeated password."
+        "500":
+          description: "Internal error."
+  /user/{userId}/transaction:
+    post:
+      tags:
+      - "user"
+      - "transaction"
+      summary: "Creates a new Transaction for a given user ID."
+      description: "This endpoint adds a new transaction for a given user ID. In a real-life scenario, a given user's client should request a POST to a /me route and retrieve users identification through a JWT token."
+      operationId: "createTransaction"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters:
+      - in: "path"
+        name: "userId"
+        description: "User ID to add new transaction"
+        type: "string"
+        required: true
+      - in: "body"
+        name: "body"
+        description: "Transaction item"
+        required: true
+        schema:
+          type: "array"
+          items:
+            $ref: "#/definitions/Transaction"
+      responses:
+        default:
+          description: "successful operation"
+        "400":
+          description: "Malformed Transaction Item"
+        "500":
+          description: "Internal Error"
+    get:
+      tags:
+      - "user"
+      - "transaction"
+      summary: "Get all transactions for a given user id."
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters:
+      - in: "path"
+        name: "userId"
+        description: "User ID to add new transaction"
+        type: "string"
+        required: true
+      responses:
+        default:
+          description: "successful operation"
+        "400":
+          description: "Invalid user id"
+  /transaction/{transactionId}:
+    get:
+      tags:
+      - "transaction"
+      summary: "Get a transaction given it's id."
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters:
+      - in: "path"
+        name: "transactionId"
+        description: "Transaction ID"
+        type: "string"
+        required: true
+      responses:
+        default:
+          description: "successful operation"
+        "400":
+          description: "Invalid user id"
+    put:
+      tags:
+      - "transaction"
+      summary: "Update a transaction given it's id."
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters:
+      - in: "path"
+        name: "transactionId"
+        description: "Transaction ID"
+        type: "string"
+        required: true
+      - in: "body"
+        name: "transaction"
+        description: "Transaction item with updated fields"
+        schema:
+          $ref: "Transaction"
+      responses:
+        default:
+          description: "successful operation"
+        "400":
+          description: "Invalid user id"
+    delete:
+      tags:
+      - "transaction"
+      summary: "Delete a transaction given it's ID."
+      parameters:
+      - in: "path"
+        name: "transactionId"
+        description: "Transaction ID"
+        type: "string"
+        required: true
+      responses:
+        default:
+          description: "successful operation"
+        "400":
+          description: "Invalid user id"
+definitions:
+  User:
+    type: "object"
+    properties:
+      id:
+        type: "integer"
+        format: "int64"
+      email:
+        type: "string"
+      firstName:
+        type: "string"
+      lastName:
+        type: "string"
+      password:
+        type: "string"
+      transaction:
+        type: "array"
+        items:
+          $ref: "#/definitions/Transaction"
+    xml:
+      name: "User"
+  Transaction:
+    type: "object"
+    properties:
+      id:
+        type: "integer"
+        format: "int64"
+      description:
+        type: "string"
+      amount:
+        type: "number"
+      type:
+        type: "string"
+      idUser:
+        type: "integer"
+    xml:
+      name: "Tag"
+externalDocs:
+  description: "Find out more about Swagger"
+  url: "http://swagger.io"
