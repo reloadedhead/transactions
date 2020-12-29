@@ -2,12 +2,30 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import * as serviceWorkerRegistration from './serviceWorkerRegistration';
 import reportWebVitals from './reportWebVitals';
+import AppShell from './components/app-shell';
+import { createMuiTheme, MuiThemeProvider } from '@material-ui/core';
+
+const App = () => {
+  const theme = createMuiTheme({
+    palette: {
+      primary: {
+        main: '#031A6E',
+      },
+      secondary: {
+        main: '#E6492D',
+      },
+    },
+  });
+  return (
+    <MuiThemeProvider theme={theme}>
+      <AppShell />
+    </MuiThemeProvider>
+  );
+};
 
 ReactDOM.render(
   <React.StrictMode>
-    <div>
-      Hello World!
-    </div>
+    <App />
   </React.StrictMode>,
   document.getElementById('root')
 );

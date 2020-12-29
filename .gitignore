@@ -22,4 +22,5 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 *.lock
+/yarn.lock~7daff31... add: useful libraries
 .eslintcache
