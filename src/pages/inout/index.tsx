@@ -1,6 +1,7 @@
 import React from 'react';
 import { createStyles, Grid, makeStyles, Theme, Typography } from '@material-ui/core';
 import CurrentBalance from '../../components/current-balance';
+import Transactions from '../../components/transactions';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -19,6 +20,9 @@ const InOut = () => {
     <Grid container>
       <Grid item xs={12}>
         <CurrentBalance />
+      </Grid>
+      <Grid item xs={12}>
+        <Transactions />
       </Grid>
     </Grid>
   );
