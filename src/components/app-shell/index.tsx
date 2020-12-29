@@ -1,6 +1,7 @@
 import { makeStyles, Theme, createStyles, CssBaseline } from '@material-ui/core';
 import React from 'react';
 import BottomNav from './bottom-nav';
+import ContentRouter from './content';
 import Header from './header';
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -38,7 +39,7 @@ const AppShell = () => {
       <Header />
       <main className={classes.content}>
         <div className={classes.toolbar} />
-        <div>Hello World!</div>
+        <ContentRouter />
       </main>
       <BottomNav />
     </div>

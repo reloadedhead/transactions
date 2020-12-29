@@ -2,8 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import * as serviceWorkerRegistration from './serviceWorkerRegistration';
 import reportWebVitals from './reportWebVitals';
-import AppShell from './components/app-shell';
 import { createMuiTheme, MuiThemeProvider } from '@material-ui/core';
+import Router from './router';
 
 const App = () => {
   const theme = createMuiTheme({
@@ -18,7 +18,7 @@ const App = () => {
   });
   return (
     <MuiThemeProvider theme={theme}>
-      <AppShell />
+      <Router />
     </MuiThemeProvider>
   );
 };
