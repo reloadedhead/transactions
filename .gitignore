@@ -1,16 +1,18 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
 # dependencies
-/node_modules
+/front/node_modules
 /.pnp
 .pnp.js
 
 # testing
-/coverage
+/front/coverage
 
 # production
 /build
 *.eslintcache
+/front/build
+
 # misc
 .DS_Store
 .env.local
@@ -24,3 +26,4 @@ yarn-error.log*
 *.lock
 /yarn.lock~7daff31... add: useful libraries
 .eslintcache
+./front/eslintcache
